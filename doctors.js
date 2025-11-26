@@ -6,29 +6,29 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/medicine", (request, response) => {
-    const sqlQuery = "SELECT * FROM medicines";
+app.get("/doctor", (request, response) => {
+    const sqlQuery = "SELECT * FROM doctors";
     db.query(sqlQuery, (err, result) => {
         if (err) {
-            return response.status(500).json({ message: "Error fetching medicines", error: err });
+            return response.status(500).json({ message: "Error fetching doctor", error: err });
 
         }
-        response.json(result);
+       return response.json(result);
     });
 });
 
-app.get("/medicine/:id", (req, res) => {
-    const query = "SELECT * FROM medicines WHERE id = ?";
+app.get("/doctor/:id", (req, res) => {
+    const query = "SELECT * FROM doctors WHERE dr_id = ?";
     const id = req.params.id;
 
     db.query(query, [id], (err, results) => {
         if (err) {
-            res.status(500).json({ message: "Error fetching medicine", error: err });
+            res.status(500).json({ message: "Error fetching doctors", error: err });
             return;
         }
 
         if (results.length === 0) {
-            return res.status(404).json({ message: "Medicine not found" });
+            return res.status(404).json({ message: "doctors not found" });
 
         }
         res.json(results[0])
@@ -38,6 +38,6 @@ app.get("/medicine/:id", (req, res) => {
 });
 
 
-app.listen(4000, () => {
+app.listen(3000, () => {
     console.log("server is running")
 })
