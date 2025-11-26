@@ -6,18 +6,18 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/doctor", (request, response) => {
+app.get("/getAllDoctor", (request, response) => {
     const sqlQuery = "SELECT * FROM doctors";
     db.query(sqlQuery, (err, result) => {
         if (err) {
             return response.status(500).json({ message: "Error fetching doctor", error: err });
 
         }
-       return response.json(result);
+        return response.json(result);
     });
 });
 
-app.get("/doctor/:id", (req, res) => {
+app.get("/searchDoctor/:id", (req, res) => {
     const query = "SELECT * FROM doctors WHERE dr_id = ?";
     const id = req.params.id;
 

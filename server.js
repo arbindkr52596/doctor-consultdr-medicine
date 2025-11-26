@@ -6,7 +6,7 @@ const path = require("path");
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get("/medicine", (request, response) => {
+app.get("/getAllMedicine", (request, response) => {
     const sqlQuery = "SELECT * FROM medicines";
     db.query(sqlQuery, (err, result) => {
         if (err) {
@@ -17,7 +17,7 @@ app.get("/medicine", (request, response) => {
     });
 });
 
-app.get("/medicine/:id", (req, res) => {
+app.get("/getSearchMedicine/:id", (req, res) => {
     const query = "SELECT * FROM medicines WHERE id = ?";
     const id = req.params.id;
 
