@@ -13,6 +13,7 @@ exports.getAllMedicine = async (req, res) => {
   }
 };
 
+
 // GET SEARCH BY ID
 exports.getSearchMedicine = async (req, res) => {
   try {

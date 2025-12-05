@@ -10,9 +10,9 @@ const {
 } = require("../controller/medicineController");
 
 router.get("/getAllMedicine", getAllMedicine);
-router.get("/getMedicine/:id", getSearchMedicine);
+router.get("//:id", getSearchMedicine);
 router.post("/addMedicine", addMedicine);
-router.put("/updateMedicine/:id", updateMedicine);
+router.put("/getMedicineupdateMedicine/:id", updateMedicine);
 router.delete("/deleteMedicine/:id", deleteMedicine);
 
 module.exports = router;
