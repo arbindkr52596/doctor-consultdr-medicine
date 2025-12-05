@@ -1,43 +1,17 @@
 const express = require("express");
+const db = require("./config/db");
+require("dotenv").config();
+const PORT = process.env.PORT;
+
 const app = express();
-const db = require("./db");
-const path = require("path");
-
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
-app.get("/getAllMedicine", (request, response) => {
-    const sqlQuery = "SELECT * FROM medicines";
-    db.query(sqlQuery, (err, result) => {
-        if (err) {
-            return response.status(500).json({ message: "Error fetching medicines", error: err });
+const medicineRoutes = require("./route/medicineRoute");
 
-        }
-        response.json(result);
-    });
+app.use("/medicine", medicineRoutes);
+app.use("/consultDr", require("./route/consultDr"));
+app.use("/doctors", require("./route/doctors"));
+
+app.listen(PORT, () => {
+    console.log("Server is running on http://localhost:" + PORT);
 });
-
-app.get("/getSearchMedicine/:id", (req, res) => {
-    const query = "SELECT * FROM medicines WHERE id = ?";
-    const id = req.params.id;
-
-    db.query(query, [id], (err, results) => {
-        if (err) {
-            res.status(500).json({ message: "Error fetching medicine", error: err });
-            return;
-        }
-
-        if (results.length === 0) {
-            return res.status(404).json({ message: "Medicine not found" });
-
-        }
-        res.json(results[0])
-
-
-    });
-});
-
-
-app.listen(4000, () => {
-    console.log("server is running")
-})
