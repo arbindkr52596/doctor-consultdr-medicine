@@ -9,8 +9,8 @@ app.use(express.json());
 const medicineRoutes = require("./route/medicineRoute");
 
 app.use("/medicine", medicineRoutes);
-app.use("/consultDr", require("./route/consultDr"));
-app.use("/doctors", require("./route/doctors"));
+// app.use("/consultDr", require("./route/consultDr"));
+// app.use("/doctors", require("./route/doctors"));
 
 app.listen(PORT, () => {
     console.log("Server is running on http://localhost:" + PORT);
