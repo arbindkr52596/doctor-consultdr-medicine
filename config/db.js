@@ -9,11 +9,11 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
-  connectTimeout: 20000,
+  connectTimeout: 20000, // 20 seconds
 });
 
-// Optional: Test connection
-pool.getConnection(async () => {
+// TEST CONNECTION
+(async () => {
   try {
     const conn = await pool.getConnection();
     console.log("✅ MySQL Connected Successfully!");
@@ -21,6 +21,6 @@ pool.getConnection(async () => {
   } catch (err) {
     console.error("❌ MySQL Connection Error:", err.message);
   }
-});
+})();
 
 module.exports = pool;
